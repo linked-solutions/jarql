@@ -1,0 +1,12 @@
+
+{
+        "parent": [{
+                "name": "Paperino",
+                "children": ["Qui", "Quo", "Qua"],
+                "fiance": {"name": "Paperina"}
+        }, {
+                "name": "Topolino",
+                "children": ["Tip", "Tap", "Top"],
+                "fiance": {"name": "Minnie"}
+        }]
+}

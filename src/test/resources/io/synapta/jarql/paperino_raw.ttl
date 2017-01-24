@@ -1,0 +1,12 @@
+@prefix jarql: <http://jarql.com/>.
+jarql:root jarql:parent [
+              jarql:name "Paperino";
+              jarql:children "Qui", "Quo", "Qua";
+              jarql:fiance [jarql:name "Paperina"]
+              ];
+           jarql:parent [
+              jarql:name "Topolino";
+              jarql:children "Tip", "Tap", "Top";
+              jarql:fiance [jarql:name "Minnie"]
+              ].
+

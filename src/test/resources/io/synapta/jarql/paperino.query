@@ -1,0 +1,9 @@
+prefix : <http://example.com/>
+prefix jarql: <http://jarql.com/>
+
+construct { ?p :name ?n; :child [:name ?cn].}
+where {
+jarql:root jarql:parent ?p.
+?p jarql:name ?n.
+?p jarql:children ?cn.
+}
