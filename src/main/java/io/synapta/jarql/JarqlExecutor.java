@@ -67,7 +67,7 @@ public class JarqlExecutor {
             System.err.println("File " + queryFileName + " does not exist");
             System.exit(-1);
         }
-        final FileInputStream queryIn = new FileInputStream(jsonFile);
+        final FileInputStream queryIn = new FileInputStream(queryFile);
         String queryString = new BufferedReader(new InputStreamReader(queryIn)).lines().collect(Collectors.joining("\n"));
         Graph graph = execute(jsonIn, queryString);
         Serializer.getInstance().serialize(System.out, graph, "text/turtle");
