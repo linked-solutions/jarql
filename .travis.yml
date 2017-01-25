@@ -1,0 +1,13 @@
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+script: mvn clean install
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: B/Liuhjat1yA5K+nCEKdrfQbotRyprQwQao5/Zk1mGIzuZ3qWtX+Z3etgunNxcoLW5AAO4rT3wgvdS1jNhAd5KpIbHTLNflmcUSd6F6+9IPTCxITLxikee1jqSw8BwXXmPOkxrkLkJ+2B2hJ+pil2HM34OiEPpqTwej2t3tj5rJ3XsOzvyZ0fy5IFe/e4oiLKjf9AX2exJPqHvUI+BKKHsQ9Q4nihsrERz+cJaKgbedC0VpIQXKbX4ndVs6Ez8sNrR7ntW2YhjYcL8DcLM4CPBVoR4yFEjTcDvNBakeJ7T4WPK4wtyiuzbDzMnktOLH9zQdvZvWXqpCKv1ykclGvh6/ulZP+K9BbMbcQYmoOOzmCBlhsJ78V00jWf2jPb0pmCbDBmxsATskR7iLhybAwWXU9VFy15SME0LtpV4HR1q9XL80BkMtHzfk/dH+nKtJ88jOkl1TVqIwm+ofrDsfUEqBZQQdRm6PArXfejhSl7BXtxJPXfVK0cYtZHWk7TSARtNP4EVjFEhpk6DXVFr+0BFR6JsjcxshKnIu9YH68ck9bn4pvbA4HPnaqhFBfiXzL+ge0YlGkqd5PAdtcOuhoyBozVU2fFRErjXG/YwOI96dkgRXhmP+PZIa/PrVnK4NG3aurxdkwDhWjv4mvHhO6Fc5RIK+maC/IFwie9WLg+j0=
+  file: target/jarql-1.0-SNAPSHOT.jar
+  on:
+    repo: jarql/jarql
