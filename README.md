@@ -4,13 +4,13 @@
 # JARQL
 SPARQL construct queries on JSON files
 
-JARQL allows to execute SPARQL Contsruct Queries against JSON files.  The project was inspired by [Tarql](https://github.com/tarql/tarql) which provides similar functionality for CSV files. With JARQL you can easily transform JSON Documents to RDF.
+JARQL allows to execute SPARQL Construct Queries against JSON files.  The project was inspired by [Tarql](https://github.com/tarql/tarql) which provides similar functionality for CSV files. With JARQL you can easily transform JSON Documents to RDF.
 
 ## Usage
 
     java -jar jarql-<version>.jar <JSON-File> <Query-File>
 
-For example is you have a file called `paperino.json` with the following content:
+For example if you have a file called `paperino.json` with the following content:
 
 ```json
 {
