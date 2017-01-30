@@ -1,0 +1,30 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dcterm: <http://purl.org/dc/terms/>
+prefix pc: <http://contrattipubblici.org/>
+prefix jarql: <http://jarql.com/> 
+
+CONSTRUCT { 
+  ?URI a "Contract";
+       dcterm:identifier ?cig;
+       pc:contractingAuth ?URIpa;
+       rdfs:label ?oggetto.
+  ?URIpa a "PubAdmin";
+       rdfs:label ?denominazione;
+       dcterm:identifier ?codiceFiscaleProp.
+  ?URIpart a "Participant";
+       rdfs:label ?ragioneSocialePart;
+       dcterm:identifier ?vatIDPart.
+}
+WHERE {
+  jarql:root jarql:cig ?cig.
+  BIND(URI(CONCAT("http://test.yo/", MD5(?cig))) as ?URI).
+  jarql:root jarql:strutturaProponente ?proponente.
+  ?proponente jarql:codiceFiscaleProp ?codiceFiscaleProp.
+  ?proponente jarql:denominazione ?denominazione.
+  BIND(URI(CONCAT("http://test.yo/", MD5(?codiceFiscaleProp))) as ?URIpa).
+  jarql:root jarql:oggetto ?oggetto.
+  jarql:root jarql:partecipanti ?partecipanti.
+  ?partecipanti jarql:ragioneSociale ?ragioneSocialePart.
+  ?partecipanti jarql:vatID ?vatIDPart.
+  BIND(URI(CONCAT("http://test.yo/", MD5(?vatIDPart))) as ?URIpart).
+}

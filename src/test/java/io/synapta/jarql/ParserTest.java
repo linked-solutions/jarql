@@ -102,6 +102,7 @@ public class ParserTest {
     @Test
     public void simple() throws Exception {
         testFromResource("paperino");
+        testFromResource("contratto");
     }
     
 }

@@ -1,0 +1,18 @@
+{
+    "cig": "XXXX4A36A7",
+    "strutturaProponente": {
+        "codiceFiscaleProp": "01111111111",
+        "denominazione": "Comune di Paperopoli"
+    },
+    "oggetto": "Costruzione di un grande deposito su una collina.",
+    "partecipanti": [
+        {
+            "ragioneSociale": "OCOPOLI COSTRUZIONI S.R.L.",
+            "vatID": "42424242424"
+        },
+        {
+            "ragioneSociale": "DE PAPERONI S.P.A.",
+            "vatID": "23232323232"
+        }
+    ]
+}

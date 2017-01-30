@@ -1,0 +1,29 @@
+<http://test.yo/1f839a6f81727fc54c06d4e4be5bc51e>
+        a       "Participant"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "DE PAPERONI S.P.A."^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/identifier>
+                "23232323232"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://test.yo/0e2d5004f3fdb311f2832aa0e08031a2>
+        a       "PubAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Comune di Paperopoli"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/identifier>
+                "01111111111"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://test.yo/a80ebd2e303fa3ca5eb53f2dfb689186>
+        a       "Participant"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "OCOPOLI COSTRUZIONI S.R.L."^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/identifier>
+                "42424242424"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://test.yo/cc44b6b5f7889c004a399e90679996a0>
+        a       "Contract"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Costruzione di un grande deposito su una collina."^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://contrattipubblici.org/contractingAuth>
+                <http://test.yo/0e2d5004f3fdb311f2832aa0e08031a2> ;
+        <http://purl.org/dc/terms/identifier>
+                "XXXX4A36A7"^^<http://www.w3.org/2001/XMLSchema#string> .
