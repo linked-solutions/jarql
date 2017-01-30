@@ -29,14 +29,17 @@ For example is you have a file called `paperino.json` with the following content
 And a file called `paperino.query` with the following content:
 
 ```sparql
-prefix : <http://example.com/>
-prefix jarql: <http://jarql.com/>
+PREFIX : <http://example.com/>
+PREFIX jarql: <http://jarql.com/>
 
-construct { ?p :name ?n; :child [:name ?cn].}
-where {
-jarql:root jarql:parent ?p.
-?p jarql:name ?n.
-?p jarql:children ?cn.
+CONSTRUCT { 
+    ?p :name ?n; 
+       :child [:name ?cn].
+}
+WHERE {
+    jarql:root jarql:parent ?p.
+    ?p jarql:name ?n.
+    ?p jarql:children ?cn.
 }
 ```
 
