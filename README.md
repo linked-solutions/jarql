@@ -8,7 +8,7 @@ JARQL allows to execute SPARQL Contsruct Queries against JSON files.  The projec
 
 ## Usage
 
-TBD
+    java -jar jarql-version <JSON-File> <Query-File>
 
 ## Current limitations
 
