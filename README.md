@@ -66,6 +66,22 @@ will output the following RDF:
 ] .
 
 ```
+### Advanced usage
+Add all metadata you want using ```BIND``` combined with [SPARQL 1.1 functions](https://www.w3.org/TR/sparql11-query/#SparqlOps)!
+
+Create URI...
+```
+BIND (URI(CONCAT('http://example.com/ns#', ?var)) AS ?uri)
+```
+...add language tags...
+```
+BIND (STRLANG(?string, 'en') AS ?with_language_tag)
+```
+...or datatypes!
+```
+BIND (STRDT(?num, xsd:integer) AS ?int)
+```
+
 ## Current limitations
 
  * Nested arrays in JSON are not supported
