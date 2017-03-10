@@ -74,7 +74,7 @@ public class JarqlExecutor {
     }
     
     
-    static Graph execute(final InputStream in, final String queryString) {
+    static public Graph execute(final InputStream in, final String queryString) {
         Graph JsonGraph = new SimpleGraph();
         JarqlParser.parse(in, JsonGraph);
         JenaGraph jg = new JenaGraph(JsonGraph);
