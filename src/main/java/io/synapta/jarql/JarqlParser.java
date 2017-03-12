@@ -32,6 +32,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.function.Consumer;
 import javax.json.Json;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
@@ -45,6 +46,7 @@ import org.apache.clerezza.commons.rdf.RDFTerm;
 import org.apache.clerezza.commons.rdf.Triple;
 import org.apache.clerezza.commons.rdf.impl.utils.PlainLiteralImpl;
 import org.apache.clerezza.commons.rdf.impl.utils.TripleImpl;
+import org.apache.clerezza.rdf.ontologies.RDF;
 
 /**
  *
@@ -54,6 +56,7 @@ public class JarqlParser {
     
     final String prefix = "http://jarql.com/";
     final IRI ROOT = new IRI(prefix+"root");
+    final IRI ROOT_TYPE = new IRI(prefix+"Root");
 
 
 
@@ -149,6 +152,10 @@ public class JarqlParser {
                 parseJsonObject();
                 break;
             }
+            case START_ARRAY: {
+                parseRootJsonArray();
+                break;
+            }
             default: {
                 throw new RuntimeException("Document should start with object: " + firstEvent);
             }
@@ -157,6 +164,15 @@ public class JarqlParser {
 
     private void parseJsonObject() {
         JsonObjectParser subjectParser = new JsonObjectParser(ROOT);
+    }
+    
+    private void parseRootJsonArray() {
+        parseJsonArray(object -> {
+            if (object instanceof Literal) {
+                throw new RuntimeException("Elements of root array must not be literal");
+            }
+            sink.add(new TripleImpl((BlankNodeOrIRI) object, RDF.type, ROOT_TYPE));
+        });
     }
 
     
@@ -188,7 +204,8 @@ public class JarqlParser {
                         break;
                     }
                     case START_ARRAY: {
-                        new JsonArrayParser(subject, predicate);
+                        //new JsonArrayParser(subject, predicate);
+                        parseJsonArray(object -> sink.add(new TripleImpl(subject, predicate, object)));
                         break;
                     }
                     case START_OBJECT: {
@@ -206,41 +223,34 @@ public class JarqlParser {
 
     }
     
-    class JsonArrayParser {
-
-        private RDFTerm subject;
-        private IRI predicate;
-
-        public JsonArrayParser(BlankNodeOrIRI subject, IRI predicate) {
-            this.subject = subject;
-            this.predicate = predicate;
-            ARRAY: while (true) {
-                JsonParser.Event element = jsonParser.next();
-                switch (element) {
-                    case VALUE_STRING: {
-                        final String value = jsonParser.getString();
-                        final Literal literal = new PlainLiteralImpl(value);
-                        sink.add(new TripleImpl(subject, predicate, literal));
-                        break;
-                    }
-                    case START_ARRAY: {
-                        throw new RuntimeException("We don't know what to do with nested arrays");
-                    }
-                    case START_OBJECT: {
-                        final BlankNode object = new BlankNode();
-                        sink.add(new TripleImpl(subject, predicate, object));
-                        new JsonObjectParser(object);
-                        break;
-                    }
-                    case END_ARRAY: {
-                        break ARRAY;
-                    }
-                    default: {
-                        throw new RuntimeException("Not supported here: " + element);
-                    }
+    private void parseJsonArray(Consumer<RDFTerm> elementProcessor) {
+        ARRAY: while (true) {
+            JsonParser.Event element = jsonParser.next();
+            switch (element) {
+                case VALUE_STRING: {
+                    final String value = jsonParser.getString();
+                    final Literal literal = new PlainLiteralImpl(value);
+                    elementProcessor.accept(literal);
+                    //sink.add(new TripleImpl(subject, predicate, literal));
+                    break;
+                }
+                case START_ARRAY: {
+                    throw new RuntimeException("We don't know what to do with nested arrays");
+                }
+                case START_OBJECT: {
+                    final BlankNode object = new BlankNode();
+                    elementProcessor.accept(object);
+                    //sink.add(new TripleImpl(subject, predicate, object));
+                    new JsonObjectParser(object);
+                    break;
+                }
+                case END_ARRAY: {
+                    break ARRAY;
+                }
+                default: {
+                    throw new RuntimeException("Not supported here: " + element);
                 }
             }
         }
-
     }
 }

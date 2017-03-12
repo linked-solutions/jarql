@@ -72,10 +72,15 @@ public class ParserTest {
     public void tearDown() {
     }
 
-    static void testFromResource(String baseName) throws Exception {
+    static void testFromResource(String baseName, boolean checkRaw) throws Exception {
         final Parser parser = Parser.getInstance();
-        final InputStream jsonGraphTurtle = ParserTest.class.getResourceAsStream(baseName+"_raw.ttl");
-        final ImmutableGraph expectedJsonGraph = parser.parse(jsonGraphTurtle, SupportedFormat.TURTLE);
+        final ImmutableGraph expectedJsonGraph;
+        if (checkRaw) {
+            final InputStream jsonGraphTurtle = ParserTest.class.getResourceAsStream(baseName+"_raw.ttl");
+            expectedJsonGraph = parser.parse(jsonGraphTurtle, SupportedFormat.TURTLE);
+        } else {
+            expectedJsonGraph = null;
+        }
         
         final InputStream queryStream = ParserTest.class.getResourceAsStream(baseName+".query");
         String queryString = new BufferedReader(new InputStreamReader(queryStream)).lines().collect(Collectors.joining("\n"));
@@ -90,7 +95,9 @@ public class ParserTest {
         final Graph graph = new SimpleGraph();
         JarqlParser.parse(inJson, graph);
         final ImmutableGraph result = graph.getImmutableGraph();
-        Assert.assertEquals("JsonGraph wrong", expectedJsonGRaph, result);
+        if (expectedJsonGRaph != null) {
+            Assert.assertEquals("JsonGraph wrong", expectedJsonGRaph, result);
+        }
         
         final InputStream inJsonAgain = ParserTest.class.getResourceAsStream(fileName);
         
@@ -100,9 +107,17 @@ public class ParserTest {
     }
     
     @Test
-    public void simple() throws Exception {
-        testFromResource("paperino");
-        testFromResource("contratto");
+    public void paperino() throws Exception {
+        testFromResource("paperino", true);
+    }
+    @Test
+    public void contratto() throws Exception {
+        testFromResource("contratto", true);
+    }
+    
+    @Test
+    public void array() throws Exception {
+        testFromResource("array", false);
     }
     
 }
