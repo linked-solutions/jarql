@@ -1,5 +1,6 @@
 @prefix jarql: <http://jarql.com/>.
-jarql:root jarql:cig "XXXX4A36A7";
+jarql:root a jarql:Root;
+        jarql:cig "XXXX4A36A7";
            jarql:strutturaProponente [
                jarql:codiceFiscaleProp "01111111111";
                jarql:denominazione "Comune di Paperopoli"

@@ -149,7 +149,7 @@ public class JarqlParser {
         final Event firstEvent = jsonParser.next();
         switch (firstEvent) {
             case START_OBJECT: {
-                parseJsonObject();
+                parseRootJsonObject();
                 break;
             }
             case START_ARRAY: {
@@ -162,8 +162,9 @@ public class JarqlParser {
         }
     }
 
-    private void parseJsonObject() {
-        JsonObjectParser subjectParser = new JsonObjectParser(ROOT);
+    private void parseRootJsonObject() {
+        parseJsonObject(ROOT);
+        sink.add(new TripleImpl(ROOT, RDF.type, ROOT_TYPE));
     }
     
     private void parseRootJsonArray() {
@@ -176,52 +177,46 @@ public class JarqlParser {
     }
 
     
-    /**
-     * Parses JSon Objects
-     */
-    class JsonObjectParser {
+    
 
-        private RDFTerm subject;
-
-        public JsonObjectParser(BlankNodeOrIRI subject) {
-            this.subject = subject;
-            ALLKEYS: while(true) {
-                JsonParser.Event event = jsonParser.next();
-                if (event == Event.END_OBJECT) {
-                    break ALLKEYS;
+    public void parseJsonObject(BlankNodeOrIRI subject) {
+        ALLKEYS: while(true) {
+            JsonParser.Event event = jsonParser.next();
+            if (event == Event.END_OBJECT) {
+                break ALLKEYS;
+            }
+            if (!event.equals(JsonParser.Event.KEY_NAME)) {
+                throw new RuntimeException("Sorry: " + event+ jsonParser.getString());
+            }
+            String key = jsonParser.getString();
+            final IRI predicate = new IRI(prefix + key);
+            final Event next = jsonParser.next();
+            switch (next) {
+                case VALUE_STRING: {
+                    final String value = jsonParser.getString();
+                    final Literal literal = new PlainLiteralImpl(value);
+                    sink.add(new TripleImpl(subject, predicate, literal));
+                    break;
                 }
-                if (!event.equals(JsonParser.Event.KEY_NAME)) {
-                    throw new RuntimeException("Sorry: " + event+ jsonParser.getString());
+                case START_ARRAY: {
+                    //new JsonArrayParser(subject, predicate);
+                    parseJsonArray(object -> sink.add(new TripleImpl(subject, predicate, object)));
+                    break;
                 }
-                String key = jsonParser.getString();
-                final IRI predicate = new IRI(prefix + key);
-                final Event next = jsonParser.next();
-                switch (next) {
-                    case VALUE_STRING: {
-                        final String value = jsonParser.getString();
-                        final Literal literal = new PlainLiteralImpl(value);
-                        sink.add(new TripleImpl(subject, predicate, literal));
-                        break;
-                    }
-                    case START_ARRAY: {
-                        //new JsonArrayParser(subject, predicate);
-                        parseJsonArray(object -> sink.add(new TripleImpl(subject, predicate, object)));
-                        break;
-                    }
-                    case START_OBJECT: {
-                        final BlankNode object = new BlankNode();
-                        sink.add(new TripleImpl(subject, predicate, object));
-                        new JsonObjectParser(object);
-                        break;
-                    }
-                    default: {
-                        throw new RuntimeException("Not supported here: " + next);
-                    }
+                case START_OBJECT: {
+                    final BlankNode object = new BlankNode();
+                    sink.add(new TripleImpl(subject, predicate, object));
+                    parseJsonObject(object);
+                    break;
+                }
+                default: {
+                    throw new RuntimeException("Not supported here: " + next);
                 }
             }
         }
-
     }
+
+    
     
     private void parseJsonArray(Consumer<RDFTerm> elementProcessor) {
         ARRAY: while (true) {
@@ -231,7 +226,6 @@ public class JarqlParser {
                     final String value = jsonParser.getString();
                     final Literal literal = new PlainLiteralImpl(value);
                     elementProcessor.accept(literal);
-                    //sink.add(new TripleImpl(subject, predicate, literal));
                     break;
                 }
                 case START_ARRAY: {
@@ -240,8 +234,7 @@ public class JarqlParser {
                 case START_OBJECT: {
                     final BlankNode object = new BlankNode();
                     elementProcessor.accept(object);
-                    //sink.add(new TripleImpl(subject, predicate, object));
-                    new JsonObjectParser(object);
+                    parseJsonObject(object);
                     break;
                 }
                 case END_ARRAY: {
