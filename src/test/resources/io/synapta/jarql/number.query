@@ -1,0 +1,10 @@
+prefix : <http://example.com/>
+prefix jarql: <http://jarql.com/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+construct { [] :value ?n}
+where {
+?root a jarql:Root.
+?root jarql:offset ?o.
+BIND(xsd:integer(?o) AS ?n)
+}

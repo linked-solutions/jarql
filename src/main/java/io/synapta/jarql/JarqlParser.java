@@ -192,7 +192,8 @@ public class JarqlParser {
             final IRI predicate = new IRI(prefix + key);
             final Event next = jsonParser.next();
             switch (next) {
-                case VALUE_STRING: {
+                case VALUE_STRING: 
+                case VALUE_NUMBER: {
                     final String value = jsonParser.getString();
                     final Literal literal = new PlainLiteralImpl(value);
                     sink.add(new TripleImpl(subject, predicate, literal));

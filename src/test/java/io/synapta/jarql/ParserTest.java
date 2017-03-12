@@ -120,4 +120,9 @@ public class ParserTest {
         testFromResource("array", false);
     }
     
+    @Test
+    public void number() throws Exception {
+        testFromResource("number", false);
+    }
+    
 }
