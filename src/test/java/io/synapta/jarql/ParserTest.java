@@ -71,8 +71,10 @@ public class ParserTest {
     @After
     public void tearDown() {
     }
-
     static void testFromResource(String baseName, boolean checkRaw) throws Exception {
+        testFromResource(baseName, checkRaw, true);
+    }
+    static void testFromResource(String baseName, boolean checkRaw, boolean checkFinal) throws Exception {
         final Parser parser = Parser.getInstance();
         final ImmutableGraph expectedJsonGraph;
         if (checkRaw) {
@@ -82,11 +84,19 @@ public class ParserTest {
             expectedJsonGraph = null;
         }
         
-        final InputStream queryStream = ParserTest.class.getResourceAsStream(baseName+".query");
-        String queryString = new BufferedReader(new InputStreamReader(queryStream)).lines().collect(Collectors.joining("\n"));
         
-        final InputStream finalGraphTurtle = ParserTest.class.getResourceAsStream(baseName+".ttl");
-        final ImmutableGraph expectedFinalGraph = parser.parse(finalGraphTurtle, SupportedFormat.TURTLE);
+        
+        final ImmutableGraph expectedFinalGraph;
+        final String queryString;
+        if (checkFinal) {
+            final InputStream queryStream = ParserTest.class.getResourceAsStream(baseName+".query");
+            queryString = new BufferedReader(new InputStreamReader(queryStream)).lines().collect(Collectors.joining("\n"));
+            final InputStream finalGraphTurtle = ParserTest.class.getResourceAsStream(baseName+".ttl");
+            expectedFinalGraph = parser.parse(finalGraphTurtle, SupportedFormat.TURTLE);
+        } else {
+            queryString = null;
+            expectedFinalGraph = null;
+        }
         
         testFromResource(baseName+".json", expectedJsonGraph, expectedFinalGraph, queryString);
     }
@@ -98,12 +108,12 @@ public class ParserTest {
         if (expectedJsonGRaph != null) {
             Assert.assertEquals("JsonGraph wrong", expectedJsonGRaph, result);
         }
-        
-        final InputStream inJsonAgain = ParserTest.class.getResourceAsStream(fileName);
-        
-        Graph executorResultGraph = JarqlExecutor.execute(inJsonAgain, queryString);
-        final ImmutableGraph resultExecutor = executorResultGraph.getImmutableGraph();
-        Assert.assertEquals("ResultGraph wrong", expectedFinalGraph, resultExecutor);
+        if (queryString != null) {
+            final InputStream inJsonAgain = ParserTest.class.getResourceAsStream(fileName);
+            Graph executorResultGraph = JarqlExecutor.execute(inJsonAgain, queryString);
+            final ImmutableGraph resultExecutor = executorResultGraph.getImmutableGraph();
+            Assert.assertEquals("ResultGraph wrong", expectedFinalGraph, resultExecutor);
+        }
     }
     
     @Test
@@ -123,6 +133,11 @@ public class ParserTest {
     @Test
     public void number() throws Exception {
         testFromResource("number", false);
+    }
+    
+    @Test
+    public void booleanValue() throws Exception {
+        testFromResource("boolean", true, false);
     }
     
 }

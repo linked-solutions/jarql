@@ -1,0 +1,4 @@
+@prefix jarql: <http://jarql.com/>.
+jarql:root a jarql:Root;
+  jarql:cool false;
+  jarql:hot true.

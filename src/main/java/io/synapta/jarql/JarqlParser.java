@@ -46,7 +46,9 @@ import org.apache.clerezza.commons.rdf.RDFTerm;
 import org.apache.clerezza.commons.rdf.Triple;
 import org.apache.clerezza.commons.rdf.impl.utils.PlainLiteralImpl;
 import org.apache.clerezza.commons.rdf.impl.utils.TripleImpl;
+import org.apache.clerezza.commons.rdf.impl.utils.TypedLiteralImpl;
 import org.apache.clerezza.rdf.ontologies.RDF;
+import org.apache.clerezza.rdf.ontologies.XSD;
 
 /**
  *
@@ -196,6 +198,16 @@ public class JarqlParser {
                 case VALUE_NUMBER: {
                     final String value = jsonParser.getString();
                     final Literal literal = new PlainLiteralImpl(value);
+                    sink.add(new TripleImpl(subject, predicate, literal));
+                    break;
+                }
+                case VALUE_TRUE: {
+                    final Literal literal = new TypedLiteralImpl("true", XSD.boolean_);
+                    sink.add(new TripleImpl(subject, predicate, literal));
+                    break;
+                }
+                case VALUE_FALSE: {
+                    final Literal literal = new TypedLiteralImpl("false", XSD.boolean_);
                     sink.add(new TripleImpl(subject, predicate, literal));
                     break;
                 }
