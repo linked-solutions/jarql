@@ -5,6 +5,11 @@
     <artifactId>jarql</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <scm>
+       <url>https://github.com/jarql/jarql</url>
+       <connection>scm:git:git://github.com/jarql/jarql.git</connection>
+       <developerConnection>scm:git:git@github.com:jarql/jarql.git</developerConnection>
+    </scm>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -80,6 +85,17 @@
     <build>
         <finalName>${finalName}</finalName>
         <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-release-plugin</artifactId>
+              <version>2.5.3</version>
+              <configuration>
+                <autoVersionSubmodules>true</autoVersionSubmodules>
+                <useReleaseProfile>false</useReleaseProfile>
+                <releaseProfiles>release</releaseProfiles>
+                <goals>deploy</goals>
+              </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
