@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>solutions.linked</groupId>
     <artifactId>jarql</artifactId>
-    <version>1.10-SNAPSHOT</version>
+    <version>1.10</version>
     <packaging>jar</packaging>
     <name>Jarql</name>
     <description>SPARQL for JSON: Turn JSON into RDF using SPARQL syntax.</description>
@@ -12,7 +12,7 @@
        <url>https://github.com/linked-solutions/jarql</url>
        <connection>scm:git:git://github.com/linked-solutions/jarql.git</connection>
        <developerConnection>scm:git:git@github.com:linked-solutions/jarql.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>jarql-1.10</tag>
    </scm>
    <distributionManagement>
         <snapshotRepository>
