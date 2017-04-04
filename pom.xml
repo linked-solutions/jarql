@@ -6,9 +6,9 @@
     <version>1.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <scm>
-       <url>https://github.com/jarql/jarql</url>
-       <connection>scm:git:git://github.com/jarql/jarql.git</connection>
-       <developerConnection>scm:git:git@github.com:jarql/jarql.git</developerConnection>
+       <url>https://github.com/linked-solutions/jarql</url>
+       <connection>scm:git:git://github.com/linked-solutions/jarql.git</connection>
+       <developerConnection>scm:git:git@github.com:linked-solutions/jarql.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
     <licenses>
