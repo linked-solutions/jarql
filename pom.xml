@@ -5,6 +5,9 @@
     <artifactId>jarql</artifactId>
     <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>Jarql</name>
+    <description>SPARQL for JSON: Turn JSON into RDF using SPARQL syntax.</description>
+    <url>http://jarql.linked.solutions</url>
     <scm>
        <url>https://github.com/linked-solutions/jarql</url>
        <connection>scm:git:git://github.com/linked-solutions/jarql.git</connection>
