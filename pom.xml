@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>solutions.linked.jarql</groupId>
     <artifactId>jarql</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
     <scm>
        <url>https://github.com/linked-solutions/jarql</url>
        <connection>scm:git:git://github.com/linked-solutions/jarql.git</connection>
        <developerConnection>scm:git:git@github.com:linked-solutions/jarql.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>jarql-1.5</tag>
    </scm>
    <distributionManagement>
         <snapshotRepository>
