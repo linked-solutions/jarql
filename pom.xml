@@ -8,7 +8,7 @@
         <relativePath />
     </parent>
     <artifactId>jarql</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Jarql</name>
     <description>SPARQL for JSON: Turn JSON into RDF using SPARQL syntax.</description>
@@ -17,7 +17,7 @@
         <url>https://github.com/linked-solutions/jarql</url>
         <connection>scm:git:git://github.com/linked-solutions/jarql.git</connection>
         <developerConnection>scm:git:git@github.com:linked-solutions/jarql.git</developerConnection>
-        <tag>jarql-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <dependencies>
         <dependency>
