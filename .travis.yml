@@ -2,7 +2,7 @@ language: java
 jdk:
 - oraclejdk8
 sudo: false
-script: mvn clean install -DfinalName=jarql-$TRAVIS_TAG
+script: mvn clean install -Pexecutable -DfinalName=jarql-$TRAVIS_TAG
 deploy:
   skip_cleanup: true
   provider: releases
