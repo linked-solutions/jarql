@@ -222,6 +222,9 @@ public class JarqlParser {
                     parseJsonObject(object);
                     break;
                 }
+                case VALUE_NULL: {
+                	break;
+                }
                 default: {
                     throw new RuntimeException("Not supported here: " + next);
                 }
