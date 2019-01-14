@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jarql/jarql.svg?branch=master)](https://travis-ci.org/jarql/jarql)
+[![Build Status](https://travis-ci.org/linked-solutions/jarql.svg?branch=master)](https://travis-ci.org/linked-solutions/jarql)
 
 
 # JARQL
