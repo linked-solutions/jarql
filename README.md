@@ -99,4 +99,4 @@ BIND (STRDT(?num, xsd:integer) AS ?int)
  
  ## Similar Projects
  
-  * (JSON2RDF)[https://github.com/AtomGraph/JSON2RDF] provides streaming conversion from JSON to RDF.
+  * [JSON2RDF](https://github.com/AtomGraph/JSON2RDF) provides streaming conversion from JSON to RDF.
