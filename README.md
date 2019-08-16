@@ -96,3 +96,7 @@ BIND (STRDT(?num, xsd:integer) AS ?int)
 
  * Nested arrays in JSON are not supported
  * The order of JSon Arrays is irrelevant
+ 
+ ## Similar Projects
+ 
+  * (JSON2RDF)[https://github.com/AtomGraph/JSON2RDF] provides streaming conversion from JSON to RDF.
