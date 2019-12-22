@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.synapta.jarql;
+package solutions.linked.jarql;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -33,7 +33,7 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
-import static io.synapta.jarql.JarqlParser.parse;
+import static solutions.linked.jarql.JarqlParser.parse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

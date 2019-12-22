@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.synapta.jarql;
+package solutions.linked.jarql;
 
 import java.io.InputStream;
 import java.io.OutputStream;

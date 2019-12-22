@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.synapta.jarql;
+package solutions.linked.jarql;
 
 
-import io.synapta.jarql.JarqlExecutor;
-import io.synapta.jarql.JarqlParser;
+import solutions.linked.jarql.JarqlExecutor;
+import solutions.linked.jarql.JarqlParser;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
