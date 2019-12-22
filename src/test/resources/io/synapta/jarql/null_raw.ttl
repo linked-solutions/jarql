@@ -1,0 +1,4 @@
+@prefix jarql: <http://jarql.com/>.
+jarql:root a jarql:Root;
+  jarql:GeogAreaCod "PA";
+  jarql:EntityCod "TRS-IT-SIC-07856".
