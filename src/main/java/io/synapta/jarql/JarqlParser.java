@@ -238,7 +238,8 @@ public class JarqlParser {
         ARRAY: while (true) {
             JsonParser.Event element = jsonParser.next();
             switch (element) {
-                case VALUE_STRING: {
+                case VALUE_STRING: 
+                case VALUE_NUMBER: {
                     final String value = jsonParser.getString();
                     final Literal literal = new PlainLiteralImpl(value);
                     elementProcessor.accept(literal);

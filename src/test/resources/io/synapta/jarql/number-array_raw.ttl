@@ -1,0 +1,3 @@
+@prefix jarql: <http://jarql.com/>.
+jarql:root a jarql:Root;
+  jarql:number "219412".

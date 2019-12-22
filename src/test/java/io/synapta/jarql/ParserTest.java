@@ -145,4 +145,9 @@ public class ParserTest {
         testFromResource("null", true, false);
     }
     
+    @Test
+    public void numberArray() throws Exception {
+        testFromResource("number-array", true, false);
+    }
+    
 }
