@@ -140,4 +140,9 @@ public class ParserTest {
         testFromResource("boolean", true, false);
     }
     
+    @Test
+    public void jsonNull() throws Exception {
+        testFromResource("null", true, false);
+    }
+    
 }
